@@ -1,0 +1,41 @@
+
+{% extends "base.html" %}
+
+{% block head %}   
+<title>To Do</title>
+{% endblock %} 
+
+{% block body %}    
+<div class="content">
+  <h1>testing page</h1>
+  {% if task | length < 1 %}
+    <h3>there is no task</h3>
+  {% else%}
+    <table>
+      <tr><!--rows-->
+          <th><!--table head column-->
+              Task
+          </th>
+          <th>Added</th>
+          <th>Actions</th>
+      </tr>
+      {% for t in task%}
+        <tr>
+            <td><!--table data-->
+                {{t.content}}
+            </td>
+            <td>{{t.created.strftime("%Y-%m-%d")}}</td>
+            <td>
+              <a href="/delete/{{t.id}}">delete</a><br/>
+              <a href="/update/{{t.id}}">edit</a>
+            </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+  <form action="/" method="POST">
+      <input type="text" name = "content" id="content">
+      <input type="submit" value ="Add task" id="btn_add" >
+  </form>
+</div>
+ {% endblock %} 
